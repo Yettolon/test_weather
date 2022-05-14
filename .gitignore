@@ -12,6 +12,4 @@ htmlcov/
 dist/
 build/
 *.egg-info/
-nginx.conf
-local_post.py
-local_get.py
+*.log

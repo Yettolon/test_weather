@@ -25,13 +25,15 @@ def get_list():
                 return bad_request('lng does not fit')
             #getting data
             datas = db.engine.execute(
-                    f"SELECT latitude,longitude,temperature,timess, ( 6371  * acos( cos( radians({lat}) )"
-                    " * cos( radians( latitude ) ) * "
-                    f"cos( radians( longitude ) - radians({lng}) ) + sin( radians({lat}) ) * "
-                    "sin( radians( latitude ) ) ) ) AS distance FROM weathers "
-                    f" WHERE ( 3959 * acos( cos( radians({lat}) ) * cos( radians( latitude ) ) * "
-                    f"cos( radians( longitude ) - radians({lng}) ) + sin( radians({lat}) ) * "
-                    f"sin( radians( latitude ) ) ) ) < {radius} ORDER BY distance;").fetchall()
+                    f'''
+                    SELECT latitude,longitude,temperature,timess, (6371 * acos(cos(radians({lat}))
+                        * cos(radians(latitude)) * 
+                        cos(radians(longitude) - radians({lng})) + sin( radians({lat})) * 
+                        sin( radians(latitude)))) AS distance FROM weathers 
+                    WHERE (3959 * acos(cos(radians({lat})) * cos(radians(latitude)) * 
+                        cos(radians(longitude) - radians({lng})) + sin(radians({lat})) * 
+                        sin(radians(latitude)))) < {radius} 
+                    ORDER BY distance;''').fetchall()
             #json
             json_datas_page = [{'lat':i.latitude,
                 'lng':i.longitude,
