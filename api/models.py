@@ -1,7 +1,8 @@
 from . import db
 
+
 class WeathModel(db.Model):
-    __tablename__ = 'weathers'
+    __tablename__ = "weathers"
     id = db.Column(db.Integer(), primary_key=True)
     latitude = db.Column(db.Float())
     longitude = db.Column(db.Float())
@@ -10,4 +11,4 @@ class WeathModel(db.Model):
     date_del = db.Column(db.DateTime(), index=True)
 
     def __str__(self):
-        return f'{self.id}'
+        return f"{self.id}"
